@@ -83,7 +83,7 @@ class App extends Component {
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto" style={{width: "400px"}}>
+              <div className="content mr-auto ml-auto" style={{width: "500px"}}>
                 <a
                   href="http://www.dappuniversity.com/bootcamp"
                   target="_blank"
@@ -135,7 +135,7 @@ class App extends Component {
                       return(
                         <tr key={index}>
                           <td>{tx.returnValues.to}</td>
-                          <td>{tx.returnValues.value.toString()}</td>
+                          <td>{window.web3.utils.fromWei(tx.returnValues.value.toString(), 'Ether')}</td>
                         </tr>
                       )
                     })}
