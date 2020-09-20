@@ -33,13 +33,26 @@ class App extends Component {
     const web3 = window.web3;
 
     const accounts = await web3.eth.getAccounts();
-    this.setState({account: accounts[0]});
+    this.setState({ account: accounts[0] });
     const daiTokenAddress = "0x688bdBc3D214418D064496Fc6e7A1D0cf20cD270"; //If loading from a different computer, place DAI address here. Found in DaiTokenMock.json around like 1184, in the bottom. Replace with actual Dai address if on Ethereum mainnet or an Ethereum testnet. 29:45 in the video he explains more.
     const daiTokenMock = new web3.eth.Contract(DaiTokenMock.abi, daiTokenAddress);
-    this.setState({daiTokenMock})
+    this.setState({daiTokenMock : daiTokenMock})
+    const balance = await daiTokenMock.methods.balanceOf(this.state.account).call();
     console.log(accounts);
     console.log(this.state.daiTokenMock);
+    console.log(balance.toString());
+    console.log(web3.utils.fromWei(balance.toString()))
     console.log(web3);
+  }
+
+  constructor(props){
+    super(props)
+    this.state = {
+      account: '',
+      daiTokenMock: null,
+      balance: 0,
+      transactions: []
+    }
   }
   
   render() {
