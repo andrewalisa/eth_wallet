@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../logo.png';
+import daiLogo from '../dai-logo.png';
 import './App.css';
 import Web3 from 'web3';
 import DaiTokenMock from '../abis/DaiTokenMock.json';
@@ -83,7 +83,7 @@ class App extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={logo} className="App-logo" alt="logo" />
+                  <img src={daiLogo} width="150px" className="App-logo" alt="Dai Logo" />
                 </a>
                 <h1>Dapp University Starter Kit</h1>
                 <p>
