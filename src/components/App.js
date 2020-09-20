@@ -1,8 +1,30 @@
 import React, { Component } from 'react';
 import logo from '../logo.png';
 import './App.css';
+import Web3 from 'web3';
 
 class App extends Component {
+  async componentWillMount(){
+    //Connecting this to the Ethereum blockchain
+    await this.loadWeb3();
+
+    await this.loadBlockchainData()
+  }
+
+  //From Web3 / Metamask documentation 
+  async loadWeb3(){
+    if (window.ethereum){
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    }
+    else if (window.web3){
+      window.web3 = new Web3(window.web3.currentProvider);
+    }
+    else{
+      window.alert("Non-Ethereum browser detected. You should consider trying to connect Metamask to the wallet.");
+    }
+  }
+  
   render() {
     return (
       <div>
