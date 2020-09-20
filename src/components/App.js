@@ -47,7 +47,7 @@ class App extends Component {
     this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether')});
 
     const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account} }); //Note: This will only show transactions that we SENT. It will not show transactions received. In the tutorial he said we can "figure that out", as an exercise. 
-    this.setState({ transactions})
+    this.setState({ transactions })
     console.log(transactions)
   }
 
@@ -130,6 +130,16 @@ class App extends Component {
                       <th scope="col">Value</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    { this.state.transactions.map((tx, index) => {
+                      return(
+                        <tr>
+                          <td>{tx.returnValues.to}</td>
+                          <td>{tx.returnValues.value.toString()}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
                 </table>
               </div>
             </main>
