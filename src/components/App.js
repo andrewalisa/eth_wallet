@@ -46,7 +46,8 @@ class App extends Component {
 
     this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether')});
 
-    const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account} }); //Note: This will only show transactions that we SENT. It will not show transactions received. In the tutorial he said we can "figure that out", as an exercise. 
+    //const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest', filter: { from: this.state.account} }); //Note: This will only show transactions that we SENT. It will not show transactions received. In the tutorial he said we can "figure that out", as an exercise. 
+    const transactions = await daiTokenMock.getPastEvents('Transfer', { fromBlock: 0, toBlock: 'latest' });
     this.setState({ transactions })
     console.log(transactions)
   }
@@ -70,27 +71,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <a
-            className="navbar-brand col-sm-3 col-md-2 mr-0"
-            href="http://www.dappuniversity.com/bootcamp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Dapp University
-          </a>
-        </nav>
+        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"></nav>
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto" style={{width: "500px"}}>
-                <a
-                  href="http://www.dappuniversity.com/bootcamp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={daiLogo} width="150px" className="App-logo" alt="Dai Logo" />
-                </a>
+              <div className="content mr-auto ml-auto" style={{width: "600px"}}>
+                <img src={daiLogo} width="150px" className="App-logo" alt="Dai Logo" />
                 <h1>{this.state.balance} DAI</h1>
                 <form onSubmit={(event) => {
                   event.preventDefault();
@@ -126,16 +112,16 @@ class App extends Component {
                 <table className="table mt-4">
                   <thead>
                     <tr>
-                      <th scope="col">Recipient</th>
+                      <th scope="col">Address</th>
                       <th scope="col">Value</th>
                     </tr>
                   </thead>
                   <tbody>
-                    { this.state.transactions.map((tx, index) => {
+                    { this.state.transactions.reverse().map((tx, index) => {
                       return(
                         <tr key={index}>
-                          <td>{tx.returnValues.to}</td>
-                          <td>{window.web3.utils.fromWei(tx.returnValues.value.toString(), 'Ether')}</td>
+                          <td>{tx.returnValues.to === this.state.account ? tx.returnValues.from : tx.returnValues.to}</td>
+                          <td>{tx.returnValues.to === this.state.account ? '+' : '-'} {window.web3.utils.fromWei(tx.returnValues.value.toString(), 'Ether')} DAI</td>
                         </tr>
                       )
                     })}
