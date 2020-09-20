@@ -133,7 +133,7 @@ class App extends Component {
                   <tbody>
                     { this.state.transactions.map((tx, index) => {
                       return(
-                        <tr>
+                        <tr key={index}>
                           <td>{tx.returnValues.to}</td>
                           <td>{tx.returnValues.value.toString()}</td>
                         </tr>
