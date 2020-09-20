@@ -87,7 +87,11 @@ class App extends Component {
                 </a>
                 <h1>{this.state.balance} DAI</h1>
                 <form onSubmit={(event) => {
+                  event.preventDefault();
+                  const recipient = this.recipient.value;
+                  const amount = window.web3.utils.toWei(this.amount.value, 'Ether');
 
+                  console.log(recipient, amount);
                 }}>
                     <div className="form-group">
                       <input 
@@ -103,7 +107,7 @@ class App extends Component {
                       <input 
                         id="amount"
                         type="text"
-                        ref={(input) => { this.recipient = input }}
+                        ref={(input) => { this.amount = input }}
                         className="form-control"
                         placeholder="Amount to send"
                         required
