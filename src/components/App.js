@@ -77,7 +77,7 @@ class App extends Component {
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">
+              <div className="content mr-auto ml-auto" style={{width: "400px"}}>
                 <a
                   href="http://www.dappuniversity.com/bootcamp"
                   target="_blank"
@@ -85,18 +85,32 @@ class App extends Component {
                 >
                   <img src={daiLogo} width="150px" className="App-logo" alt="Dai Logo" />
                 </a>
-                <h1>Dapp University Starter Kit</h1>
-                <p>
-                  Edit <code>src/components/App.js</code> and save to reload.
-                </p>
-                <a
-                  className="App-link"
-                  href="http://www.dappuniversity.com/bootcamp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LEARN BLOCKCHAIN <u><b>NOW! </b></u>
-                </a>
+                <h1>{this.state.balance} DAI</h1>
+                <form onSubmit={(event) => {
+
+                }}>
+                    <div className="form-group">
+                      <input 
+                        id="recipient"
+                        type="text"
+                        ref={(input) => { this.recipient = input }}
+                        className="form-control"
+                        placeholder="Recipient Address"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <input 
+                        id="amount"
+                        type="text"
+                        ref={(input) => { this.recipient = input }}
+                        className="form-control"
+                        placeholder="Amount to send"
+                        required
+                      />
+                    </div>
+                    <button type="submit" className="btn btn-primary btn-block">Send</button>
+                </form>
               </div>
             </main>
           </div>
