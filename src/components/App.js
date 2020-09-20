@@ -8,7 +8,9 @@ class App extends Component {
     //Connecting this to the Ethereum blockchain
     await this.loadWeb3();
 
-    await this.loadBlockchainData()
+    //Connecting this to the Blockchain data
+    await this.loadBlockchainData();
+    
   }
 
   //From Web3 / Metamask documentation 
@@ -23,6 +25,13 @@ class App extends Component {
     else{
       window.alert("Non-Ethereum browser detected. You should consider trying to connect Metamask to the wallet.");
     }
+  }
+
+  async loadBlockchainData(){
+    //Getting a connection to Web3
+    const web3 = window.web3;
+    
+    console.log(web3);
   }
   
   render() {
