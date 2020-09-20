@@ -51,6 +51,10 @@ class App extends Component {
     console.log(transactions)
   }
 
+  transfer(recipient, amount){
+    this.state.daiTokenMock.methods.transfer(recipient, amount).send({ from: this.state.account });
+  }
+
   constructor(props){
     super(props)
     this.state = {
@@ -59,6 +63,8 @@ class App extends Component {
       balance: 0,
       transactions: []
     }
+
+    this.transfer = this.transfer.bind(this); //What does .bind do?
   }
   
   render() {
@@ -92,6 +98,8 @@ class App extends Component {
                   const amount = window.web3.utils.toWei(this.amount.value, 'Ether');
 
                   console.log(recipient, amount);
+
+                  this.transfer(recipient, amount);
                 }}>
                     <div className="form-group">
                       <input 
@@ -115,6 +123,14 @@ class App extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary btn-block">Send</button>
                 </form>
+                <table className="table mt-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">Recipient</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                </table>
               </div>
             </main>
           </div>
